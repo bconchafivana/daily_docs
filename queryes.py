@@ -20,7 +20,7 @@ json_extract_string(d.operation, 'base_rate') as base_rate,
 round(30*100*(round((o.comissions + o.expenses)*d.finance_amount/o.finance_amount) + json_extract_string(d.operation, 'price_dif'))/(json_extract_string(d.operation, 'expiration_days')*d.finance_amount), 2) as rate_all_in,
 json_extract_string(d.operation, 'expiration_days') as expiration_days,
 json_extract_string(d.operation, 'financing_factoring') as financing_factoring, 
-coms.comission, 
+coms.comission,  date(json_extract_string(o.bank_account, 'accounting_date')) as accounting_abonado_date,
 round((o.comissions + o.expenses)*d.finance_amount/o.finance_amount) as com_exps,
 d.debtor_category
 from fc_documents d
