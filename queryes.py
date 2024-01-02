@@ -9,7 +9,8 @@ case when dd.fecha_ejecucion - dd.vencimiento - 1 <= 0 then '1. No Mora'
 FROM daily_delay_payments_status dd
 WHERE dd.fecha_ejecucion IN (SELECT MIN(ddps.fecha_ejecucion)
                              FROM daily_delay_payments_status ddps
-                             GROUP BY EXTRACT(MONTH FROM ddps.fecha_ejecucion))
+                             GROUP BY 100*extract(year from ddps.fecha_ejecucion) + extract(month from ddps.fecha_ejecucion)
+			     )
 OR dd.fecha_ejecucion > now() - INTERVAL '30 days' """
 
 
